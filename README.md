@@ -88,6 +88,12 @@ The [Databricks Phase 2 notebook](databricks/phase2_bronze_silver_gold.py) uses 
 
 **Status:** Code published, not yet executed in your Databricks workspace. Azure Data Factory, ADLS Gen2, and Power BI remain future phases.
 
+## Phase 3 — Databricks Jobs (setup guide, not deployed)
+
+The Phase 2 Delta Lake notebook was **user-validated in Databricks Free Edition** (five Bronze CDC events, two active orders, one Silver delete tombstone, and Gold total revenue 165.00). For repeatable execution, see [Phase 3 Databricks Jobs and monitoring](docs/phase3-jobs-monitoring.md) and [read-only SQL checks](sql/phase3_validation.sql).
+
+**Status:** Scheduling guidance and SQL committed; **no Databricks job has yet been created or executed by this repository automation**. A scheduled job will reprocess static synthetic events; it is not live ingestion. Azure Data Factory, ADLS Gen2, Azure Databricks deployment, and Power BI remain future work.
+
 ## Roadmap
 
 1. Add inventory domain with its own CDC/snapshot semantics and joined analytics.
