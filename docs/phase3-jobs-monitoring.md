@@ -10,8 +10,8 @@
 | Notebook task | `phase2_bronze_silver_gold` in a Serverless job | Confirmed |
 | Manual job execution | Green run bars and **View latest successful run** link | Confirmed successful |
 | Job run's final notebook output | Not independently shown on Runs details | Confirm by opening run |
-| Weekly schedule | Active, Sunday 09:00, America/Chicago in editor | Selected, **save not confirmed** |
-| Failure email | Failure checked; skipped/cancelled muted in notifications editor | Selected, **save not confirmed** |
+| Weekly schedule | Active, Sunday 09:00, America/Chicago in editor | **Saved (owner confirmed Nov 3, 2026)** |
+| Failure email | Failure checked; skipped/cancelled muted in notifications editor | **Saved (owner confirmed Nov 3, 2026)** |
 
 **Next UI check:** On the saved job open **Tasks → Schedules & Triggers**, confirm an **Active** Sunday 09:00 America/Chicago schedule exists; open **Job notifications**, confirm **Failure** is enabled for the desired destination. Do not publish the destination email address in this public repository. Review **Runs → View latest successful run** for the exact task output.
 
@@ -62,7 +62,7 @@ In Jobs & Pipelines, open the job → **Runs** → latest run. Check:
 ## Boundaries
 
 - GitHub documents and SQL queries have been committed; they have **not** been executed in your workspace from ChatGPT.
-- The owner has already created and manually run the job in the Databricks UI. The saved trigger and saved notification settings still need confirmation.
+- The owner has already created and manually run the job in the Databricks UI. The owner confirmed both the weekly trigger and failure notification settings were saved on November 3, 2026. Future scheduled execution and email delivery have not been independently observed.
 - The demo still uses static synthetic events embedded in the notebook. To simulate advancing batches, you would need new events and ingestion checkpoints.
 - Azure Data Factory / ADLS Gen2 / Azure Databricks (Azure-managed workspace) / Power BI remain **not deployed**.
 - Do not publish workspace tokens, private workspace URLs, personal email addresses, or credentials.
