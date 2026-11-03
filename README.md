@@ -20,7 +20,7 @@ Order systems send inserts, updates, and deletes. Downstream analytics need the 
 | Databricks Bronze/Silver/Gold Delta MERGE | **Executed and validated in Databricks Free Edition (Nov 3, 2026)** | `databricks/phase2_bronze_silver_gold.py` |
 | Databricks Gold customer revenue view | **Created; result assertions passed** | `databricks/phase2_bronze_silver_gold.py` (separate `sql/gold_customer_revenue.sql` is an unverified template) |
 | Databricks serverless Job | **Created and successful run shown (Nov 3, 2026)** | `docs/phase3-jobs-monitoring.md` |
-| Weekly trigger / failure emails | **Configured in UI screenshots; saved/active status not independently verified** | `docs/phase3-jobs-monitoring.md` |
+| Weekly trigger / failure emails | **Saved and enabled (owner confirmed Nov 3, 2026)** | `docs/phase3-jobs-monitoring.md` |
 | ADF pipeline, ADLS Bronze ingestion | **Planned, not built** | `adf/README.md` |
 | Power BI dashboard | **Planned, not built** | No dashboard included |
 
@@ -94,7 +94,7 @@ The [Databricks Phase 2 notebook](databricks/phase2_bronze_silver_gold.py) uses 
 
 On **November 3, 2026**, the owner created the Databricks Free Edition job `cdc-lakehouse-synthetic-validation` with a serverless notebook task running `phase2_bronze_silver_gold`. The Jobs **Runs** page showed a green successful run and a **View latest successful run** link. The job-run output itself was not separately captured; the notebook's interactive execution had already passed CDC/revenue/replay assertions.
 
-UI screenshots showed a proposed **active weekly trigger** for **Sunday at 09:00 America/Chicago** and **failure-only email notifications**, with skipped/cancelled notifications muted. Those screens did not establish that **Save** was clicked for either configuration; verify both in Databricks before calling them active. First planned Sunday is **November 8, 2026** if the trigger was saved and enabled.
+UI screenshots showed a proposed **active weekly trigger** for **Sunday at 09:00 America/Chicago** and **failure-only email notifications**, with skipped/cancelled notifications muted. The owner subsequently confirmed that both settings were saved and enabled on November 3, 2026. The first scheduled Sunday is **November 8, 2026**. The first future scheduled execution and email-alert delivery have not yet been observed.
 
 See the [Phase 3 job operations guide](docs/phase3-jobs-monitoring.md) and [read-only validation SQL](sql/phase3_validation.sql). The scheduled job replays **static synthetic events**; it does not fetch new events or run ADF/ADLS.
 
