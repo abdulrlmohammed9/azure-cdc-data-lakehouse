@@ -1,6 +1,6 @@
 # Azure CDC Data Lakehouse — Synthetic Starter
 
-[![Status: local starter](https://img.shields.io/badge/status-local%20starter-blue)](#implementation-status)
+[![Status: validated learning project](https://img.shields.io/badge/status-validated%20learning%20project-brightgreen)](#implementation-status)
 
 An educational, portfolio-friendly example of **change data capture (CDC)** and a **Bronze → Silver → Gold** data flow, inspired by common Azure Data Engineering patterns. All included records are **synthetic**. This repository is independently recreated and contains **no employer/customer source code, credentials, or production data**.
 
@@ -16,13 +16,15 @@ Order systems send inserts, updates, and deletes. Downstream analytics need the 
 | Synthetic inventory CSV | **Sample only** | Not ingested into Gold yet |
 | Local ordered CDC I/U/D processing | **Implemented** | `src/local_cdc.py` |
 | Local Silver/Gold JSON outputs | **Implemented** | Run instructions below |
-| Local Python unit tests | **Included** | `tests/test_local_cdc.py` |
-| Databricks Delta MERGE examples | **Phase 2 notebook committed, unverified in Databricks** | `databricks/phase2_bronze_silver_gold.py` |
-| Databricks SQL Gold view | **Template, unverified** | `sql/gold_customer_revenue.sql` |
-| ADF pipeline, ADLS Bronze ingestion, monitoring | **Planned, not built** | `adf/README.md` |
+| Local Python unit tests | **3 passed in GitHub Codespaces (Nov 3, 2026)** | `tests/test_local_cdc.py` |
+| Databricks Bronze/Silver/Gold Delta MERGE | **Executed and validated in Databricks Free Edition (Nov 3, 2026)** | `databricks/phase2_bronze_silver_gold.py` |
+| Databricks Gold customer revenue view | **Created; result assertions passed** | `databricks/phase2_bronze_silver_gold.py` (separate `sql/gold_customer_revenue.sql` is an unverified template) |
+| Databricks serverless Job | **Created and successful run shown (Nov 3, 2026)** | `docs/phase3-jobs-monitoring.md` |
+| Weekly trigger / failure emails | **Configured in UI screenshots; saved/active status not independently verified** | `docs/phase3-jobs-monitoring.md` |
+| ADF pipeline, ADLS Bronze ingestion | **Planned, not built** | `adf/README.md` |
 | Power BI dashboard | **Planned, not built** | No dashboard included |
 
-**Do not interpret this repository as proof that an Azure production pipeline has been deployed.** The working core is a small local Python demonstration. The cloud implementation is the next phase.
+**This is a validated educational Databricks Free Edition project, not an Azure production deployment.** The local Python starter and Databricks Delta notebook have been executed successfully; Azure Data Factory, ADLS Gen2, and Azure-hosted Databricks remain unconfigured.
 
 ## Architecture
 
@@ -82,22 +84,24 @@ requirements.txt Optional test dependency
 - Financial arithmetic uses Python floats for demo simplicity; a production pipeline should use precise decimal types.
 - The provided inventory domain is illustrative and isn't included in the aggregate.
 
-## Phase 2: Databricks Bronze / Silver / Gold (code committed; cloud validation pending)
+## Phase 2: Databricks Bronze / Silver / Gold (validated in Free Edition)
 
 The [Databricks Phase 2 notebook](databricks/phase2_bronze_silver_gold.py) uses synthetic records to create managed Delta Bronze event, Silver order state, customer dimension, inventory sample, and Gold customer revenue tables/view. It includes sequence-aware CDC MERGE, delete tombstones, replay checks, and assertions. See the [step-by-step Databricks setup and validation guide](docs/phase2-databricks.md).
 
-**Status:** Code published, not yet executed in your Databricks workspace. Azure Data Factory, ADLS Gen2, and Power BI remain future phases.
+**Status (Nov 3, 2026):** Owner-executed notebook finished with the reported validation message: `PASS: Bronze=5 unique events; Silver=2 active + 1 tombstone; Gold=$165.00; replay safe`. Catalog Explorer screenshots show the five objects in `workspace.cdc_portfolio`. Azure Data Factory, ADLS Gen2, and Power BI remain future phases.
 
-## Phase 3 — Databricks Jobs (setup guide, not deployed)
+## Phase 3 — Databricks Jobs and monitoring (manual job run verified)
 
-The Phase 2 Delta Lake notebook was **user-validated in Databricks Free Edition** (five Bronze CDC events, two active orders, one Silver delete tombstone, and Gold total revenue 165.00). For repeatable execution, see [Phase 3 Databricks Jobs and monitoring](docs/phase3-jobs-monitoring.md) and [read-only SQL checks](sql/phase3_validation.sql).
+On **November 3, 2026**, the owner created the Databricks Free Edition job `cdc-lakehouse-synthetic-validation` with a serverless notebook task running `phase2_bronze_silver_gold`. The Jobs **Runs** page showed a green successful run and a **View latest successful run** link. The job-run output itself was not separately captured; the notebook's interactive execution had already passed CDC/revenue/replay assertions.
 
-**Status:** Scheduling guidance and SQL committed; **no Databricks job has yet been created or executed by this repository automation**. A scheduled job will reprocess static synthetic events; it is not live ingestion. Azure Data Factory, ADLS Gen2, Azure Databricks deployment, and Power BI remain future work.
+UI screenshots showed a proposed **active weekly trigger** for **Sunday at 09:00 America/Chicago** and **failure-only email notifications**, with skipped/cancelled notifications muted. Those screens did not establish that **Save** was clicked for either configuration; verify both in Databricks before calling them active. First planned Sunday is **November 8, 2026** if the trigger was saved and enabled.
+
+See the [Phase 3 job operations guide](docs/phase3-jobs-monitoring.md) and [read-only validation SQL](sql/phase3_validation.sql). The scheduled job replays **static synthetic events**; it does not fetch new events or run ADF/ADLS.
 
 ## Roadmap
 
 1. Add inventory domain with its own CDC/snapshot semantics and joined analytics.
-2. Validate Delta MERGE in a personal Databricks workspace; add repeat/replay tests.
+2. Extend the validated Databricks notebook with additional CDC edge cases, incremental event ingestion and monitoring.
 3. Build ADLS Bronze landing and deploy ADF linked services, pipelines, and monitoring.
 4. Add data-quality checks, CI, secured configuration, deployment guidance, and a Power BI model.
 
