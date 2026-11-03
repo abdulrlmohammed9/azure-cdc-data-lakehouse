@@ -1,6 +1,6 @@
 # Phase 4 — Databricks AI/BI Dashboard
 
-**Status:** SQL dataset templates and instructions committed. The dashboard is not yet created or validated in the Databricks workspace.
+**Status (November 3, 2026):** Project owner created, visually validated, and confirmed publication of the Databricks Free Edition dashboard. Screenshots show four counters, a regional revenue chart, CDC distribution donut, and customer performance table. The published URL and access by external viewers have not been verified. The data is synthetic and static.
 
 ## Create a dashboard in Free Edition
 
