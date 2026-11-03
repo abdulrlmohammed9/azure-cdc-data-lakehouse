@@ -17,7 +17,7 @@ Order systems send inserts, updates, and deletes. Downstream analytics need the 
 | Local ordered CDC I/U/D processing | **Implemented** | `src/local_cdc.py` |
 | Local Silver/Gold JSON outputs | **Implemented** | Run instructions below |
 | Local Python unit tests | **Included** | `tests/test_local_cdc.py` |
-| Databricks Delta MERGE example | **Starter, unverified in Azure** | `databricks/cdc_delta_starter.py` |
+| Databricks Delta MERGE examples | **Phase 2 notebook committed, unverified in Databricks** | `databricks/phase2_bronze_silver_gold.py` |
 | Databricks SQL Gold view | **Template, unverified** | `sql/gold_customer_revenue.sql` |
 | ADF pipeline, ADLS Bronze ingestion, monitoring | **Planned, not built** | `adf/README.md` |
 | Power BI dashboard | **Planned, not built** | No dashboard included |
@@ -81,6 +81,12 @@ requirements.txt Optional test dependency
 - The local program recomputes active state from the complete event file. It does **not** implement durable streaming checkpoints, cross-run sequence persistence, distributed Delta MERGE, or cloud orchestration.
 - Financial arithmetic uses Python floats for demo simplicity; a production pipeline should use precise decimal types.
 - The provided inventory domain is illustrative and isn't included in the aggregate.
+
+## Phase 2: Databricks Bronze / Silver / Gold (code committed; cloud validation pending)
+
+The [Databricks Phase 2 notebook](databricks/phase2_bronze_silver_gold.py) uses synthetic records to create managed Delta Bronze event, Silver order state, customer dimension, inventory sample, and Gold customer revenue tables/view. It includes sequence-aware CDC MERGE, delete tombstones, replay checks, and assertions. See the [step-by-step Databricks setup and validation guide](docs/phase2-databricks.md).
+
+**Status:** Code published, not yet executed in your Databricks workspace. Azure Data Factory, ADLS Gen2, and Power BI remain future phases.
 
 ## Roadmap
 
