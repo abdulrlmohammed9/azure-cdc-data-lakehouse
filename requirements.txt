@@ -1,0 +1,5 @@
+# Tested local starter requires Python 3.10+ and no third-party runtime packages.
+# Optional tools for testing:
+pytest>=8,<10
+# Azure/Databricks PySpark example runs in a configured Databricks Runtime.
+# Do not install pyspark locally unless you have a compatible Spark/Java environment.
