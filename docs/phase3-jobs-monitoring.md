@@ -1,6 +1,19 @@
 # Phase 3 — Free Edition scheduling and monitoring (operator guide)
 
-**Status: configuration instructions committed; no Databricks job has been created or run by ChatGPT.** Phase 2 notebook was validated by the project owner in Databricks Free Edition (five Bronze events, two active Silver orders, one delete tombstone, and Gold revenue of 165.00).
+**Status as of November 3, 2026:** The project owner created and manually executed a serverless Databricks Job successfully, as shown on the Runs page. The job was configured in the Databricks UI by the owner, **not** remotely created by ChatGPT. The notebook separately passed validation of five Bronze events, two active orders, one tombstone and $165.00 Gold revenue.
+
+### Evidence and verification boundaries
+
+| Item | Screenshot evidence | Status |
+| --- | --- | --- |
+| Job name | `cdc-lakehouse-synthetic-validation` | Confirmed |
+| Notebook task | `phase2_bronze_silver_gold` in a Serverless job | Confirmed |
+| Manual job execution | Green run bars and **View latest successful run** link | Confirmed successful |
+| Job run's final notebook output | Not independently shown on Runs details | Confirm by opening run |
+| Weekly schedule | Active, Sunday 09:00, America/Chicago in editor | Selected, **save not confirmed** |
+| Failure email | Failure checked; skipped/cancelled muted in notifications editor | Selected, **save not confirmed** |
+
+**Next UI check:** On the saved job open **Tasks → Schedules & Triggers**, confirm an **Active** Sunday 09:00 America/Chicago schedule exists; open **Job notifications**, confirm **Failure** is enabled for the desired destination. Do not publish the destination email address in this public repository. Review **Runs → View latest successful run** for the exact task output.
 
 ## Objective
 
@@ -49,7 +62,7 @@ In Jobs & Pipelines, open the job → **Runs** → latest run. Check:
 ## Boundaries
 
 - GitHub documents and SQL queries have been committed; they have **not** been executed in your workspace from ChatGPT.
-- Databricks Jobs & Pipelines will run the notebook only once you create the job in the UI.
+- The owner has already created and manually run the job in the Databricks UI. The saved trigger and saved notification settings still need confirmation.
 - The demo still uses static synthetic events embedded in the notebook. To simulate advancing batches, you would need new events and ingestion checkpoints.
 - Azure Data Factory / ADLS Gen2 / Azure Databricks (Azure-managed workspace) / Power BI remain **not deployed**.
 - Do not publish workspace tokens, private workspace URLs, personal email addresses, or credentials.
