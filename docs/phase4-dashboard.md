@@ -2,6 +2,18 @@
 
 **Status (November 3, 2026):** Project owner created, visually validated, and confirmed publication of the Databricks Free Edition dashboard. Screenshots show four counters, a regional revenue chart, CDC distribution donut, and customer performance table. The published URL and access by external viewers have not been verified. The data is synthetic and static.
 
+## Dashboard export evidence
+
+The project owner supplied a one-page PDF export of the published dashboard (Nov 3, 2026). It confirms four KPI cards, regional revenue, CDC operation distribution, and the customer performance table. The export also contains browser/Databricks navigation elements; the clean PNG preview is generated directly from this same PDF.
+
+**Local evidence files prepared for GitHub upload:**
+- `docs/cdc-lakehouse-dashboard.pdf` — original PDF, renamed
+- `docs/images/cdc-lakehouse-dashboard.png` — PDF-rendered preview
+
+**Upload status:** These binary evidence files are **not yet committed to GitHub**. Add them through GitHub's **Add file → Upload files** interface. The README includes links that will work after upload.
+
+See [demo walkthrough](demo-walkthrough.md) for a time-coded recording plan. No video recording exists yet.
+
 ## Create a dashboard in Free Edition
 
 1. Open Databricks **Dashboards**, or **New → Dashboard**, and create `CDC Lakehouse - Analytics Overview`.
