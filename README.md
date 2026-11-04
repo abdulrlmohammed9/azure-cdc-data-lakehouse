@@ -114,5 +114,3 @@ requirements.txt  Python test dependency
 - Scheduled executions replay the sample data; the actual first future scheduled run and alert delivery have not yet been observed.
 - The local Python prototype and the Databricks implementation are separate demonstrations.
 - ADF orchestration, ADLS Gen2, Azure-hosted Databricks, production checkpoints, secure cloud deployment and Power BI remain future extensions.
-
-**Provenance:** Independently recreated portfolio project. No proprietary client code or real operational data.
