@@ -107,6 +107,14 @@ requirements.txt  Python test dependency
 - [Phase 3 scheduling and monitoring](docs/phase3-jobs-monitoring.md).
 - [Phase 4 dashboard](docs/phase4-dashboard.md).
 
+## Real-world data extension — Citi Bike GBFS (in development)
+
+A separate, **non-destructive** real-data pipeline is being added under [`citibike/`](citibike/). It captures Citi Bike public station-status and station-information snapshots with a manual GitHub Actions workflow, validates them using offline tests, and provides a separate Databricks Delta Lake notebook for historical Bronze observations, latest Silver station state, observed changes and Gold station availability.
+
+**Status:** Source code and guide committed; live feed capture, GitHub Actions execution, and Databricks execution are **not yet verified**. In Databricks Free Edition, a captured JSON file must first be uploaded to a Unity Catalog volume. This is *snapshot comparison*, not an official CDC event feed or a continuously synchronized streaming pipeline.
+
+See the [Citi Bike setup and validation guide](citibike/README.md).
+
 ## Limitations and roadmap
 
 - Current event inputs are **static synthetic samples**, not production CDC streaming or continuously arriving data.
