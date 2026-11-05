@@ -1,0 +1,37 @@
+name: Citi Bike GBFS capture (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: citibike-capture
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test offline capture validation
+        run: python -m unittest discover -s citibike/tests -v
+      - name: Capture current public Citi Bike snapshot
+        run: python -m citibike.capture
+      - name: Commit snapshot (only on manual trigger)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add citibike/data/latest_snapshot.json
+          if git diff --cached --quiet; then
+            echo "No snapshot changes"
+            exit 0
+          fi
+          git commit -m "data: capture public Citi Bike GBFS station snapshot [skip ci]"
+          git push
