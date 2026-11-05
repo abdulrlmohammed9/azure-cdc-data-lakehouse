@@ -77,7 +77,7 @@ DeltaTable.forName(spark, bronze).alias("t").merge(
 ).whenNotMatchedInsert(values={k:f"s.{k}" for k in ["station_id", *fields]}).execute()
 # Add change events before updating Silver. A rerun cannot insert duplicates.
 silver_df = spark.table(silver)
-prior = (incoming.alias("s").join(silver_df.alias("t"), "station_id", "left")
+prior = (incoming.alias("s").join(silver_df.alias("t"), F.col("s.station_id") == F.col("t.station_id"), "left")
   .where(F.col("t.station_id").isNull() | (F.col("s.captured_at") > F.col("t.captured_at")))
   .where(F.col("t.station_id").isNull()
      | ~F.col("s.bikes_available").eqNullSafe(F.col("t.bikes_available"))
